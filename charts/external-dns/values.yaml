@@ -1,0 +1,23 @@
+external-dns:
+  provider: azure
+  azure:
+    resourceGroup: "rg-qe73"  # Replace with your actual DNS resource group
+    subscriptionId: "73964f01-870a-44f0-8c58-98ab1d382e7a"  # Replace with actual subscription ID
+    tenantId: "c69521cd-c531-4eca-b673-3562c4e77c7f"  # Add your Azure tenant ID
+    # Use managed identity for authentication
+    useManagedIdentityExtension: true
+  interval: "1m"
+  policy: sync
+  sources:
+  - ingress
+  - service
+  domainFilters:
+  - dev.bucky.business  # Your domain
+  txtOwnerId: "k8s"
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi

@@ -1,0 +1,22 @@
+ingress-nginx:
+  controller:
+    name: nginx-internal
+    ingressClassResource:
+      name: nginx-internal
+      controllerValue: k8s.io/ingress-nginx-internal
+    admissionWebhooks:
+      enabled: true
+    service:
+      annotations:
+        service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    config:
+      use-forwarded-headers: "true"
+    metrics:
+      enabled: true
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
